@@ -50,7 +50,7 @@ All in all, using multiple libraries and APIs has led me to interacting with man
 
 - After starting using Alpha Vantage on the backend, I wanted to use it on the frontend too, but scrapped the idea quickly since I would get rate limited in mere seconds because the quote view updates every five seconds. I also did not want to use a private API key on the frontend (even though I could hide it), and Yahoo Finance API (not to be confused with yfinance, yfinance queries Yahoo Finance V10, I query YF V8 on the frontend) seems to have somewhat more stable data flow and the data it supplies allows me to be much more flexible when rendering graphs with ApexCharts. 
 
-- Please keep in mind that I am not supplying an Alpha Vantage key with Finance50. You will need to obtain your own Alpha Vantage key from [here](https://www.alphavantage.co/support/#api-key). This was not needed with Yahoo Finance, though.
+- Please keep in mind that I am not supplying Alpha Vantage keys with Finance50. You will need to obtain your own Alpha Vantage keys (both for news and stocks) from [here](https://www.alphavantage.co/support/#api-key). This was not needed with Yahoo Finance, though.
 
 - In `main.js`, `renderGraph` function takes a boolean value `update`, so that I can manually control when to run the `setInterval` of 5000ms inside `renderGraph`. This is to prevent the interval from stacking and making tens of API requests per second.
 
