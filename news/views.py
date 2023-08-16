@@ -13,8 +13,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from news.models import Asset, Theme, Transaction, User, UserSetting
 
-NEWS_KEY = "pub_21611d20be897381de311459a8a501cfdf8a3"
-STOCK_KEY = "IZTA5HWZ1YKLWTWF"
+# NEWS_KEY = ...
+# STOCK_KEY = ...
 
 
 def index(request):
