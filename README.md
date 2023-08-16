@@ -58,8 +58,7 @@ All in all, using multiple libraries and APIs has led me to interacting with man
 
 - Parsing Yahoo Finance data on the frontend was quite challenging, since it supplies almost anything related to a ticker. The parsing is done within `renderGraph` function, starting at line 125.
 
-- In `views.py` I included the API keys for submitting the project to me50, but I omitted the key when I was committing the project to my own GitHub.
 
 - In the quote page, the stock price changes color to green or red depending on price movement. To see it, you may need to wait several seconds before the first price movement happens. It wasn't shown in the video since I recorded it on a Saturday, outside of market hours.
 
-- You may notice that the app's name is "news". This is because it was going to be a news focused app, but then I changed directions with the app being finance oriented. I did change the name of the prozject but did not change the app's name, since there is no way for me to be sure that I've actually changed every reference to the old name of the app.
+- You may notice that the app's name is "news". This is because it was going to be a news focused app, but then I changed directions with the app being finance oriented. I did change the name of the project but did not change the app's name, since there is no way for me to be sure that I've actually changed every reference to the old name of the app.
