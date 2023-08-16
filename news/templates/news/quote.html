@@ -1,0 +1,178 @@
+{% extends "news/layout.html" %}
+
+{% block title %}
+    {{ symbol }} | Finance50
+{% endblock %}
+
+{% block body %}
+    <main>
+        <section style="display: flex; justify-content: space-between; max-height: 300px" id="quote-section">
+            <div style="display: flex; max-width: inherit">
+                <div style="flex-direction: column; text-align: left" class="header general-item" id="price-area">
+                    <div style="display: flex">
+                        <h2 id="quote-name">{{ symbol }}</h2>
+                        <h2 id="currentPrice"></h2>
+                    </div>
+                    <h5>{{ exchange }}</h5>
+                    <div style="display: flex">
+                        <h5 id="long-name">{{ name }}</h5>
+                        <h5 id="currency-type"></h5>
+                    </div>
+                    <!-- <h6 id="price-time">(live data, updated every 5s)</h6> -->
+
+                    <p id="range" style="display: none">1d</p>
+                    <p id="interval" style="display: none">1m</p>
+                    {% if user.is_authenticated %}
+                        {% if asset %}
+                            <h6>You own {{ asset.amount }} shares of {{ symbol }}</h6>
+                            <p id="asset-amount" style="display: none">{{ asset.amount }}</p>
+                        {% else %}
+                            <h6>You do not own any shares of {{ name }}</h6>
+                        {% endif %}
+                        <form action="{% url 'buy' symbol %}" method="post">
+                            {% csrf_token %}
+                            <div style="width: 150px">
+                                <input type="number" step="0.01" style="height: 28px; width: inherit" class="form-control input-sm col-sm-* buy-form" id="amount" name="amount" placeholder="Amount" min="0">
+                                <div style="display: flex; justify-content: space-evenly">
+                                    <input type="submit" id="buy-submit" style="background-color: darkseagreen; border-color: darkseagreen"  class="btn btn-primary btn-sm quote-button buy-form" value="Buy">
+                                    {% if asset %}
+                                    <input type="submit" formaction="{% url 'sell' symbol %}" id="sell-submit" style="background-color: indianred; border-color: indianred"  class="btn btn-primary btn-sm quote-button sell-form" value="Sell">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </form>
+                    {% else %}
+                        <h6><a href="{% url 'login_view' %}">Log in</a> to access your assets and buy or sell stocks</h6>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="header general-item" id="top-news">
+                <h3>{{ symbol }} News</h3>
+                <div style="overflow: scroll">
+                    {% for item in news %}
+                        <h6><a style="text-decoration: underline; color: inherit" href="{{ item.url }}">{{ item.title }}</a></h6>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <div id="info-area">
+            <div id="buttons">
+                <button id="chart-button" class="btn btn-primary btn-sm">Charts</button>
+                <button id="summary-button" class="btn btn-primary btn-sm">Summary</button>
+                <button id="news-button" class="btn btn-primary btn-sm">News</button>
+                <button id="about-button" class="btn btn-primary btn-sm">About {{ name }}</button>
+            </div>
+            <br>
+
+            <div id="chart-area" class="general-item">
+                <button class="range-button btn btn-secondary btn-sm" id="1m">1D</button>
+                <button class="range-button btn btn-secondary btn-sm" id="60m">5D</button>
+                <button class="range-button btn btn-secondary btn-sm" id="1d">1MO</button>
+                <button class="range-button btn btn-secondary btn-sm" id="1d">3MO</button>
+                <button class="range-button btn btn-secondary btn-sm" id="5d">1Y</button>
+                <button class="range-button btn btn-secondary btn-sm" id="1mo">5Y</button>
+                <button class="range-button btn btn-secondary btn-sm" id="1mo">10Y</button>
+                <button class="range-button btn btn-secondary btn-sm" id="1d">YTD</button>
+                <button class="range-button btn btn-secondary btn-sm" id="3mo">MAX</button>
+                <br>
+                <br>
+                <div style="max-width: inherit">
+                    <div id="chart"></div>
+                    <div id="volume-chart"></div>
+                    <h6 style="text-align: center; margin-top: -5px; margin-bottom: 10px; font-size: 0.8em">Data provided by Yahoo! Finance</h6>
+                </div>
+            </div>
+
+            <div id="summary-section" class="general-item">
+                <div id="summary-section-left">
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Dividend Per Share</b></p>
+                        <p class="summary-item-data">{{ dividendPerShare }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Dividend Yield</b></p>
+                        <p class="summary-item-data">{{ dividendYield }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>EPS</b></p>
+                        <p class="summary-item-data">{{ EPS }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Dividend Date</b></p>
+                        <p class="summary-item-data">{{ dividendDate }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Ex Dividend Date</b></p>
+                        <p class="summary-item-data">{{ exDividendDate }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Market Cap</b></p>
+                        <p class="summary-item-data">{{ marketCap }}</p>
+                    </div>
+                </div>
+                <div id="summary-section-right">
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>PE Ratio</b></p>
+                        <p class="summary-item-data">{{ PERatio }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>PEG Ratio</b></p>
+                        <p class="summary-item-data">{{ PEGRatio }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Target Price</b></p>
+                        <p class="summary-item-data">{{ targetPrice }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Trailing PE</b></p>
+                        <p class="summary-item-data">{{ trailingPE}}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>Forward PE</b></p>
+                        <p class="summary-item-data">{{ forwardPE }}</p>
+                    </div>
+                    <hr>
+                    <div class="summary-item">
+                        <p class="summary-item-title"><b>52 Week Range</b></p>
+                        <p class="summary-item-data">{{ yearLow }} - {{ yearHigh }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="news-section" class="general-item">
+                <h3>{{ symbol }} News</h3>
+                <div style="overflow: scroll">
+                        {% for item in news %}
+                            <a style="text-decoration: underline; color: inherit" href="{{ item.url }}">{{ item.title }}</a>
+                            <hr>
+                        {% endfor %}
+                </div>
+            </div>
+
+            <div id="about-section" class="general-item">
+                <div class="about-item">
+                    <h3>Address</h3>
+                    <br>
+                    <h6>{{ name }}</h6>
+                    <p>{{ address }}</p>
+                    <a href="{{ website }}">{{ website }}</a>
+                </div>
+                <div class="about-item">
+                    <h3>About {{ name }}</h3>
+                    <br>
+                    <p id="about-text">{{ summary }}</p>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

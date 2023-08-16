@@ -1,0 +1,23 @@
+{% extends "news/layout.html" %}
+
+{% block title %}
+    Register | Finance50
+{% endblock %}
+
+{% block body %}
+    <div class="form-area">
+        <form action="{% url 'register_view' %}" method="post">
+            {% csrf_token %}
+            <input class="input-field form-control" type="text" name="username" placeholder="Username">
+            <input class="input-field form-control" type="email" name="email" placeholder="Email">
+            <input class="input-field form-control" type="password" name="password" placeholder="Password">
+            <input class="input-field form-control" type="password" name="confirmation" placeholder="Confirm your password">
+            <input class="input-field btn btn-primary" type="submit" value="Register">
+        </form>
+    </div>
+
+    {% if message %}
+        <br>
+        <h5>{{ message }}</h5>
+    {% endif %}
+{% endblock %}

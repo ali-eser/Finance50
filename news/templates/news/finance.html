@@ -1,0 +1,90 @@
+{% extends "news/layout.html" %}
+
+{% block title %}
+    Finance50
+{% endblock %}
+
+{% block body %}
+    <main>
+        <section id="no-assets" class="general-item" style="display: none; max-width: 40%; margin-left: auto; margin-right: auto;">
+            <div>
+                <h3>You currently do not own any assets.</h3>
+                <h3>Enter a symbol below to get started.</h3>
+            </div>
+        </section>
+        <section id="holdings-summary" class="general-item dependant">
+            <div>
+                <h3 style="font-weight: bold; margin-top: 10px">Net Worth</h3>
+                <div>
+                    <br>
+                    <br>
+                    <h1 id="net-worth"></h1>
+                </div>
+
+            </div>
+            <div>
+                <h3 style="font-weight: bold; margin-top: 10px">Your Portfolio</h3>
+                <div id="pie-chart"></div>
+            </div>
+        </section>
+
+        <br>
+        <br>
+
+        <div class="general-item" style="max-width: 252px; max-height: 80px;
+        margin-left: auto; margin-right: auto; margin-bottom: 50px; margin-top: -20px; display: flex; align-items: center;
+        justify-content: space-around">
+            <form action="{% url 'quote_box' %}" method="post">
+                {% csrf_token %}
+                <label for="quote-box">
+                    <input class="form-control input-sm col-sm-*" id="quote-box" name="quote-box"
+                           placeholder="Enter symbol" style="max-width: 150px;" type="text">
+                </label>
+                <input type="submit" class="btn btn-primary btn-sm" value="Go">
+            </form>
+        </div>
+
+        <div class="general-item dependant">
+            <div class="buttons">
+                <button id="assets-button" class="btn btn-primary btn-sm">Assets</button>
+                <button id="transactions-button" class="btn btn-primary btn-sm">Transaction History</button>
+            </div>
+            <div id="assets-table">
+                <h3 style="font-weight: bold; margin-top: 60px">Your Assets</h3>
+                <table class="table" >
+                    <thead>
+                    <tr>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Shares Owned</th>
+                        <th scope="col">Cost Basis</th>
+                        <th scope="col">P&L</th>
+                    </tr>
+                    </thead>
+                    <tbody id="assets-body">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="transactions-table" style="display: none">
+                <h3 style="font-weight: bold; margin-top: 60px">Your Transaction History</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Transaction Type</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total Value</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                    </thead>
+                    <tbody id="transactions-body">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'news/layout.html' %}
+
+{% block title %}
+    News50
+{% endblock %}
+
+{% block body %}
+    <main style="margin: auto">
+        <div class="grid">
+            <ul >
+                {% for result in results %}
+                <li class="grid-item general-item">
+                        <h4><b><a href="{{ result.link }}">{{ result.title }}</a></b></h4>
+                        {% if result.description %}
+                        <h5>{{ result.description }}</h5>
+                        {% endif %}
+                        {% if result.image_url %}
+                        <img class="result-img" src="{{ result.image_url }}" alt="" width="300px">
+                        {% endif %}
+                        <br>
+                        <p>{{ result.source_id }} on {{ result.pubDate }}</p>
+    <!--                    <div class="keywords">-->
+    <!--                        {% for keyword in result.keywords %}-->
+    <!--                        <button class="btn btn-secondary keyword"-->
+    <!--                                style="&#45;&#45;bs-btn-padding-y: .25rem; &#45;&#45;bs-btn-padding-x: .5rem; &#45;&#45;bs-btn-font-size: .75rem;">{{ keyword }}</button>-->
+    <!--                        {% endfor %}-->
+    <!--                    </div>-->
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a href="{% url 'news' next_page_id %}"><button class="btn btn-primary" style="margin-bottom: 50px; margin-top: 30px">Next Page</button></a>
+    </main>
+{% endblock %}

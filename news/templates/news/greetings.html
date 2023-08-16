@@ -1,0 +1,15 @@
+{% extends "news/layout.html" %}
+
+{% block title %}
+    Welcome to Finance50
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div id="greetings" style="display:flex; align-items: center; justify-content: space-evenly">
+            <h1 style="font-size: 5rem">Finance50</h1>
+            <div id="vertical-line"></div>
+            <h3 style="max-width: 600px"><a href="{% url 'login_view' %}">Log in</a> or <a href="{% url 'register_view' %}">sign up</a> to access latest news, latest stock data, and manage your portfolio.</h3>
+        </div>
+    </main>
+{% endblock %}
