@@ -1,4 +1,4 @@
-# Finance50 / Harvard CS50W Final Project
+# Finance50
 #### Video Demo: https://youtu.be/cCIbmuci5yA
 #### Description: Portfolio manager, asset tracker, and news aggregator web app with Django backend
 
