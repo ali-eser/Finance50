@@ -6,16 +6,14 @@
 
 Finance50 is a web application where users can paper trade, manage their portfolios, view stock prices and company statistics, read the latest news about that company, and also aggregate news around the world according to their preferences. I opted for a finance/news application as I spend a notable amount of my time with brokerage applications where I view stocks, read the latest news and plan for my next investments.
 
-## Distinctiveness and Complexity
-Finance50 is distinct and more complex compared to the other projects in CS50W in the sense that it has many features and incorporates multiple APIs and multiple JavaScript libraries.
+## Complexity
+Finance50 has many features and incorporates multiple APIs and multiple JavaScript libraries.
 
-The application has a broader feature set compared to other projects in the course. A user can set their preferences and read news suited to their interests. They can view a stock, look at the price graph going back as old as 40Y, buy or sell that stock, view their portfolio, see how much of a profit/loss they have made on each stock they own, and view news specifically related to the company. It does have a dark/light mode switch too! Compared to other projects in CS50W, Finance50 offers more functionality to the end user, and as a result, it has a much larger codebase, especially on the frontend.
+A user can set their preferences and read news suited to their interests. They can view a stock, look at the price graph going back as old as 40Y, buy or sell that stock, view their portfolio, see how much of a profit/loss they have made on each stock they own, and view news specifically related to the company. It does have a dark/light mode switch too! Finance50 offers more functionality to the end user, and as a result, it has a much larger codebase, especially on the frontend.
 
 As mentioned above, Finance50 incorporates multiple JavaScript libraries, and multiple APIs, something that wasn't present throughout the course. For drawing charts I opted for using [ApexCharts](https://apexcharts.com/) JS library, for gathering chart data, I used [Yahoo Finance V8 API](https://query1.finance.yahoo.com/v8/finance/chart/AAPL?region=US&lang=en-US&interval=2m&range=1d) (which requires CORS to be allowed), for automatically arranging news items on the news page, I used [Masonry](https://masonry.desandro.com/), for waiting images to completely load before news section is organized with Masonry, I used [imagesLoaded](https://imagesloaded.desandro.com/) for JS.
 
 On the backend, I used [Alpha Vantage API](https://www.alphavantage.co) in order to gather required data for displaying company info and buying/selling that company's stock. I used [requests 2.25.1](https://pypi.org/project/requests/) for gathering latest news from [NewsData.io](newsdata.io) API.
-
-All in all, using multiple libraries and APIs has led me to interacting with many external sources and reading many documentations, something that has made working on this project quite complex and lengthy. I went way out of the course material to get a good understanding of utilizing different libraries and APIs together to create a functional and coherent web application.
 
 ## Directories
 - `main`
