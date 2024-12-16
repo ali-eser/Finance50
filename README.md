@@ -13,7 +13,7 @@ A user can set their preferences and read news suited to their interests. They c
 
 As mentioned above, Finance50 incorporates multiple JavaScript libraries, and multiple APIs, something that wasn't present throughout the course. For drawing charts I opted for using [ApexCharts](https://apexcharts.com/) JS library, for gathering chart data, I used [Yahoo Finance V8 API](https://query1.finance.yahoo.com/v8/finance/chart/AAPL?region=US&lang=en-US&interval=2m&range=1d) (which requires CORS to be allowed), for automatically arranging news items on the news page, I used [Masonry](https://masonry.desandro.com/), for waiting images to completely load before news section is organized with Masonry, I used [imagesLoaded](https://imagesloaded.desandro.com/) for JS.
 
-On the backend, I used [Alpha Vantage API](https://www.alphavantage.co) in order to gather required data for displaying company info and buying/selling that company's stock. I used [requests 2.25.1](https://pypi.org/project/requests/) for gathering latest news from [NewsData.io](newsdata.io) API.
+On the backend, I used [Alpha Vantage API](https://www.alphavantage.co) in order to gather required data for displaying company info and buying/selling that company's stock. I used [requests 2.25.1](https://pypi.org/project/requests/) for gathering latest news from [NewsData.io](https://newsdata.io) API.
 
 ## Directories
 - `main`
